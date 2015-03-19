@@ -19,6 +19,9 @@ Table of Bootstrap modifications:
 10) Responsive modifications
 
 */
+@import url('http://fonts.googleapis.com/css?family=Crafty+Girls');
+@import url('http://fonts.googleapis.com/css?family=Raleway:500,700,400,300');
+
 body {
   padding-top: 130px;
   background-color: #f4f4f4;
@@ -111,6 +114,8 @@ textarea {
 #topbar-first .topbar-brand {
   position: relative;
   z-index: 2;
+  font-family: 'Crafty Girls', cursive;
+  font-size: 15px;
 }
 #topbar-first .topbar-actions {
   position: relative;
@@ -128,6 +133,15 @@ textarea {
   text-align: left;
 }
 #topbar-first .notifications .btn-group > a {
+  padding: 5px 10px;
+  margin: 10px 2px;
+  display: inline-block;
+  border-radius: 2px;
+  text-decoration: none;
+  text-align: left;
+}
+
+#topbar-first .notifications .btn-group > .dropdown {
   padding: 5px 10px;
   margin: 10px 2px;
   display: inline-block;
@@ -213,6 +227,9 @@ textarea {
 #topbar-second .dropdown-menu {
   padding-top: 0;
   padding-bottom: 0;
+}
+.dropdown.open > #search-menu-dropdown {
+  width: 400px;
 }
 #topbar-second #space-menu-dropdown,
 #topbar-second #search-menu-dropdown {
@@ -343,7 +360,7 @@ textarea {
 }
 .panel-profile .panel-profile-header .profile-user-photo-container .profile-user-photo {
   border: 3px solid #fff;
-  border-radius: 5px;
+  border-radius: 50%;
 }
 .panel-profile .panel-profile-controls {
   padding-left: 160px;
@@ -617,9 +634,6 @@ ul.tour-list li.completed a {
   position: absolute;
   right: 40px;
   top: 11px;
-}
-.login-screen {
-  margin-top: -70px;
 }
 .mime {
   background-repeat: no-repeat;

@@ -30,15 +30,15 @@ class DashboardModule extends HWebModule
     public static function onTopMenuInit($event)
     {
 
-        // Is Module enabled on this workspace?
-        $event->sender->addItem(array(
-            'label' => Yii::t('DashboardModule.base', 'Dashboard'),
-            'id' => 'dashboard',
-            'icon' => '<i class="fa fa-tachometer"></i>',
-            'url' => Yii::app()->createUrl('//dashboard/dashboard'),
-            'sortOrder' => 100,
-            'isActive' => (Yii::app()->controller->module && Yii::app()->controller->module->id == 'dashboard'),
-        ));
+        // // Is Module enabled on this workspace?
+        // $event->sender->addItem(array(
+        //     'label' => Yii::t('DashboardModule.base', 'Dashboard'),
+        //     'id' => 'dashboard',
+        //     'icon' => '<i class="fa fa-home"></i>',
+        //     'url' => Yii::app()->createUrl('//dashboard/dashboard'),
+        //     'sortOrder' => 100,
+        //     'isActive' => (Yii::app()->controller->module && Yii::app()->controller->module->id == 'home'),
+        // ));
     }
 
 }

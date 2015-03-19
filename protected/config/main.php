@@ -36,7 +36,7 @@ return CMap::mergeArray($pre_config, array(
                     // enable cookie-based authentication
                     'allowAutoLogin' => true,
                     'class' => 'application.modules_core.user.components.WebUser',
-                    'loginUrl' => array('//user/auth/login'),
+                    'loginUrl' => array('//user/auth/splash'),
                 ),
                 'request' => array(
                     'class' => 'HHttpRequest',

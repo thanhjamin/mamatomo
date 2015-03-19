@@ -12,14 +12,11 @@
 $this->pageTitle = Yii::t('UserModule.views_auth_login', '<strong>Please</strong> sign in');
 ?>
 
+<div class="container">
 
-<div class="container" style="text-align: center;">
-    <h1 id="app-title" class="animated fadeIn"><?php echo CHtml::encode(Yii::app()->name); ?></h1>
-    <br>
+    <p class='auth-header'>Log in to <span class='logo-font'>mamatomo</span></p>
 
-    <div class="panel panel-default animated bounceIn" id="login-form" style="max-width: 300px; margin: 0 auto 20px; text-align: left;">
-
-        <div class="panel-heading"><?php echo Yii::t('UserModule.views_auth_login', '<strong>Please</strong> sign in'); ?></div>
+    <div class="animated fadeInUp" id="login-form" style="max-width: 350px; margin: 0 auto 20px; text-align: left;">
 
         <div class="panel-body">
             <?php
@@ -28,8 +25,6 @@ $this->pageTitle = Yii::t('UserModule.views_auth_login', '<strong>Please</strong
                 'enableAjaxValidation' => false,
             ));
             ?>
-
-            <p><?php echo Yii::t('UserModule.views_auth_login', "If you're already a member, please login with your username/email and password."); ?></p>
 
             <div class="form-group">
                 <?php echo $form->textField($model, 'username', array('class' => 'form-control', 'id' => 'login_username', 'placeholder' => Yii::t('UserModule.views_auth_login', 'username or email'))); ?>
@@ -40,22 +35,20 @@ $this->pageTitle = Yii::t('UserModule.views_auth_login', '<strong>Please</strong
                 <?php echo $form->passwordField($model, 'password', array('class' => 'form-control', 'id' => 'login_password', 'placeholder' => Yii::t('UserModule.views_auth_login', 'password'))); ?>
                 <?php echo $form->error($model, 'password'); ?>
             </div>
-
+<!-- 
             <div class="checkbox">
                 <label>
                     <?php echo $form->checkBox($model, 'rememberMe'); ?> <?php echo Yii::t('UserModule.views_auth_login', 'Remember me next time'); ?>
                 </label>
-            </div>
+            </div> -->
 
-            <hr>
-            <div class="row">
-                <div class="col-md-4">
-                    <?php echo CHtml::submitButton(Yii::t('UserModule.views_auth_login', 'Sign in'), array('class' => 'btn btn-large btn-primary')); ?>
+            <div class="form-group">
+                <div>
+                    <?php echo CHtml::submitButton(Yii::t('UserModule.views_auth_login', 'Log in with email'), array('class' => 'btn btn-large btn-primary auth-btn')); ?>
                 </div>
-                <div class="col-md-8 text-right">
+                <div>
                     <small>
-                        <?php echo Yii::t('UserModule.views_auth_login', 'Forgot your password?'); ?>
-                        <a href="<?php echo $this->createUrl('//user/auth/recoverPassword'); ?>"><br><?php echo Yii::t('UserModule.views_auth_login', 'Create a new one.') ?></a>
+                        <a href="<?php echo $this->createUrl('//user/auth/recoverPassword'); ?>" class='forgotpw'><br><?php echo Yii::t('UserModule.views_auth_login', 'Forgot your password?') ?></a>
                     </small>
                 </div>
             </div>
@@ -66,37 +59,10 @@ $this->pageTitle = Yii::t('UserModule.views_auth_login', '<strong>Please</strong
 
     </div>
 
-    <br>
+</div>
 
-    <?php if ($canRegister) : ?>
-        <div id="register-form" class="panel panel-default animated bounceInLeft"
-             style="max-width: 300px; margin: 0 auto 20px; text-align: left;">
-
-            <div class="panel-heading"><?php echo Yii::t('UserModule.views_auth_login', '<strong>Sign</strong> up') ?></div>
-
-            <div class="panel-body">
-
-                <p><?php echo Yii::t('UserModule.views_auth_login', "Don't have an account? Join the network by entering your e-mail address."); ?></p>
-                <?php
-                $form = $this->beginWidget('CActiveForm', array(
-                    'id' => 'account-register-form',
-                    'enableAjaxValidation' => false,
-                ));
-                ?>
-
-                <div class="form-group">
-                    <?php echo $form->textField($registerModel, 'email', array('class' => 'form-control', 'id' => 'register-email', 'placeholder' => Yii::t('UserModule.views_auth_login', 'email'))); ?>
-                    <?php echo $form->error($registerModel, 'email'); ?>
-                </div>
-                <hr>
-                <?php echo CHtml::submitButton(Yii::t('UserModule.views_auth_login', 'Register'), array('class' => 'btn btn-primary')); ?>
-
-                <?php $this->endWidget(); ?>
-            </div>
-        </div>
-
-    <?php endif; ?>
-
+<div id='sign-up-bottom'>
+    <p>Dont' have an account? <a href='/index.php?r=user/auth/signup'>Sign Up</p></a>
 </div>
 
 <script type="text/javascript">
@@ -123,4 +89,9 @@ $this->pageTitle = Yii::t('UserModule.views_auth_login', '<strong>Please</strong
 
 </script>
 
+<style type='text/css'>
+    body{
+        padding: 0px;
+    }
+</style>
 

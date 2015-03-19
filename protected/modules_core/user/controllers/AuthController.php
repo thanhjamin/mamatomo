@@ -43,6 +43,178 @@ class AuthController extends Controller
     /**
      * Displays the login page
      */
+    public function actionSplash() {
+        {
+
+        // If user is already logged in, redirect him to the dashboard
+        if (!Yii::app()->user->isGuest) {
+            $this->redirect(Yii::app()->user->returnUrl);
+        }
+
+        // Show/Allow Anonymous Registration
+        $canRegister = HSetting::Get('anonymousRegistration', 'authentication_internal');
+
+
+        $ntlmAutoLogin = false;
+
+        $model = new AccountLoginForm;
+
+        //TODO: Solve this via events!
+        if (Yii::app()->getModule('zsso') != null) {
+            ZSsoModule::beforeActionLogin();
+        }
+
+        // if it is ajax validation request
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'account-login-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        // collect user input data
+        if (isset($_POST['AccountLoginForm'])) {
+
+            #$_POST['AccountLoginForm'] = Yii::app()->input->stripClean($_POST['AccountLoginForm']);
+            $model->attributes = $_POST['AccountLoginForm'];
+
+            // validate user input and redirect to the previous page if valid
+            if ($model->validate() && $model->login())
+                $this->redirect(Yii::app()->user->returnUrl);
+        }
+
+        // Always clear password
+        $model->password = "";
+
+        $registerModel = new AccountRegisterForm;
+
+        // Registration enabled?
+        if ($canRegister) {
+
+            // if it is ajax validation request
+            if (isset($_POST['ajax']) && $_POST['ajax'] === 'account-register-form') {
+                echo CActiveForm::validate($registerModel);
+                Yii::app()->end();
+            }
+
+            if (isset($_POST['AccountRegisterForm'])) {
+                $_POST['AccountRegisterForm'] = Yii::app()->input->stripClean($_POST['AccountRegisterForm']);
+
+                $registerModel->attributes = $_POST['AccountRegisterForm'];
+
+                if ($registerModel->validate()) {
+
+                    // Try Load an invite
+                    $userInvite = UserInvite::model()->findByAttributes(array('email' => $registerModel->email));
+
+                    if (!$userInvite)
+                        $userInvite = new UserInvite();
+
+                    $userInvite->email = $registerModel->email;
+                    $userInvite->source = UserInvite::SOURCE_SELF;
+                    $userInvite->save();
+
+                    $userInvite->sendInviteMail();
+
+                    $this->render('register_success', array(
+                        'model' => $registerModel,
+                    ));
+                    return;
+                }
+            }
+        }
+
+
+        // display the login form
+        $this->render('splash', array('model' => $model, 'registerModel' => $registerModel, 'canRegister' => $canRegister));
+    }
+
+    }
+
+    public function actionSignup() {
+        {
+
+        // If user is already logged in, redirect him to the dashboard
+        if (!Yii::app()->user->isGuest) {
+            $this->redirect(Yii::app()->user->returnUrl);
+        }
+
+        // Show/Allow Anonymous Registration
+        $canRegister = HSetting::Get('anonymousRegistration', 'authentication_internal');
+
+
+        $ntlmAutoLogin = false;
+
+        $model = new AccountLoginForm;
+
+        //TODO: Solve this via events!
+        if (Yii::app()->getModule('zsso') != null) {
+            ZSsoModule::beforeActionLogin();
+        }
+
+        // if it is ajax validation request
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'account-login-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        // collect user input data
+        if (isset($_POST['AccountLoginForm'])) {
+
+            #$_POST['AccountLoginForm'] = Yii::app()->input->stripClean($_POST['AccountLoginForm']);
+            $model->attributes = $_POST['AccountLoginForm'];
+
+            // validate user input and redirect to the previous page if valid
+            if ($model->validate() && $model->login())
+                $this->redirect(Yii::app()->user->returnUrl);
+        }
+
+        // Always clear password
+        $model->password = "";
+
+        $registerModel = new AccountRegisterForm;
+
+        // Registration enabled?
+        if ($canRegister) {
+
+            // if it is ajax validation request
+            if (isset($_POST['ajax']) && $_POST['ajax'] === 'account-register-form') {
+                echo CActiveForm::validate($registerModel);
+                Yii::app()->end();
+            }
+
+            if (isset($_POST['AccountRegisterForm'])) {
+                $_POST['AccountRegisterForm'] = Yii::app()->input->stripClean($_POST['AccountRegisterForm']);
+
+                $registerModel->attributes = $_POST['AccountRegisterForm'];
+
+                if ($registerModel->validate()) {
+
+                    // Try Load an invite
+                    $userInvite = UserInvite::model()->findByAttributes(array('email' => $registerModel->email));
+
+                    if (!$userInvite)
+                        $userInvite = new UserInvite();
+
+                    $userInvite->email = $registerModel->email;
+                    $userInvite->source = UserInvite::SOURCE_SELF;
+                    $userInvite->save();
+
+                    $userInvite->sendInviteMail();
+
+                    $this->render('register_success', array(
+                        'model' => $registerModel,
+                    ));
+                    return;
+                }
+            }
+        }
+
+
+        // display the login form
+        $this->render('signup', array('model' => $model, 'registerModel' => $registerModel, 'canRegister' => $canRegister));
+    }
+
+    }
+
     public function actionLogin()
     {
 

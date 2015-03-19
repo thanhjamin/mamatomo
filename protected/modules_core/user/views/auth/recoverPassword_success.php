@@ -1,13 +1,15 @@
 <div class="container" style="text-align: center;">
-    <h1 id="app-title" class="animated fadeIn"><?php echo CHtml::encode(Yii::app()->name); ?></h1>
-    <br/>
-    <div class="row">
-        <div class="panel panel-default animated fadeIn" style="max-width: 300px; margin: 0 auto 20px; text-align: left;">
-            <div class="panel-heading"><?php echo Yii::t('UserModule.views_auth_recoverPassword_success', '<strong>Password</strong> recovery!'); ?></div>
-            <div class="panel-body">
-                <p><?php echo Yii::t('UserModule.views_auth_recoverPassword_success', "We’ve sent you an email containing a link that will allow you to reset your password."); ?></p><br/>
-                <a href="<?php echo $this->createUrl('//') ?>" class="btn btn-primary"><?php echo Yii::t('UserModule.views_auth_recoverPassword_success', 'back to home') ?></a>
-            </div>
+    <div class="auth-header" style='margin-bottom: 15px;'><?php echo Yii::t('UserModule.views_auth_recoverPassword_success', 'Password reset!'); ?></div>
+    <div class="animated fadeIn" style="max-width: 450px; margin: 0 auto 20px; text-align: left;">     
+        <div class="panel-body" style='text-align:center; font-size:20px;'>
+            <p><?php echo Yii::t('UserModule.views_auth_recoverPassword_success', "We’ve sent you an email containing a link that will allow you to reset your password."); ?></p><br/>
+            <a href="<?php echo $this->createUrl('//') ?>" class="btn btn-primary auth-btn" style="width: 60%;"><?php echo Yii::t('UserModule.views_auth_recoverPassword_success', 'back to home') ?></a>
         </div>
     </div>
 </div>
+
+<style type='text/css'>
+    body{
+        padding: 0px;
+    }
+</style>

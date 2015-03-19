@@ -1,4 +1,22 @@
 <div class="btn-group">
+
+   
+        <li class="dropdown">
+            <a href="#" id="search-menu" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-search"></i></a>
+            <ul class="dropdown-menu pull-right" id="search-menu-dropdown">
+                <?php $this->widget('application.widgets.TopMenuRightStackWidget', array(
+                    'widgets' => array(
+                        array('application.widgets.SearchMenuWidget', array())
+                    )
+                )); ?>
+            </ul>
+        </li>
+
+
+    <?php $this->widget('application.modules_core.space.widgets.SpaceChooserWidget', array()); ?>
+
+
     <a href="#" id="icon-notifications" data-toggle="dropdown">
         <i class="fa fa-bell"></i>
     </a>
